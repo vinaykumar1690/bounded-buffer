@@ -41,5 +41,5 @@ This is a simple C++ project that uses CMake and Ninja for building.
 
 5.  **Run the executable:**
     ```bash
-    ./helloworld
+    ./boundbuf
     ```
