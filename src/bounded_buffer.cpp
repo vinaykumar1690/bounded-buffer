@@ -40,7 +40,7 @@ class BoundedBuffer {
             std::unique_lock<std::mutex> lock(mtx);
 
             // Wait until there's space or a shutdown is requested
-            prod_c.wait_for(lock, std::chrono::milliseconds(100), [this]() {
+            prod_c.wait(lock, [this]() {
                 return q.size() < cap || shutdown_flag.load();
             });
 
@@ -60,7 +60,7 @@ class BoundedBuffer {
             std::unique_lock<std::mutex> lock(mtx);
 
             // Wait until there's data or shutdown
-            cons_c.wait_for(lock, std::chrono::milliseconds(100), [this]() {
+            cons_c.wait(lock, [this]() {
                 return !q.empty() || shutdown_flag.load();
             });
 
